@@ -2,14 +2,16 @@
  * @Author: BuXiongYu
  * @Date: 2022-10-19 21:47:49
  * @LastEditors: BuXiongYu
- * @LastEditTime: 2022-10-20 11:40:34
+ * @LastEditTime: 2022-10-21 22:39:01
  * @Description: 用户选择界面
  */
 import prompts, { PromptObject } from 'prompts'
+import { listenTriggerExit } from '.'
 import pc from 'picocolors'
 import consola from 'consola'
 
 export const bootstrap = async () => {
+    listenTriggerExit()
     const message: Array<PromptObject> = [
         {
             type: 'text',

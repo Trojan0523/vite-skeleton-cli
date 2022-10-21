@@ -2,7 +2,7 @@
  * @Author: BuXiongYu
  * @Date: 2022-10-19 22:06:52
  * @LastEditors: BuXiongYu
- * @LastEditTime: 2022-10-20 22:22:21
+ * @LastEditTime: 2022-10-21 22:40:09
  * @Description: 工具函数
  */
 import degit from 'degit'
@@ -21,7 +21,7 @@ export const cloneRemoteRepo = (projectName: string, selectedProgram: string) =>
     verbose: true,
   })
 
-  emitter.on('info', info => {
+  emitter.on('info', (info: any) => {
     if (info.code === 'SUCCESS') {
       consola.success(`project ${info.repo.user}/${info.repo.name} cloned ${pc.yellow('success')}`)
     }
@@ -63,10 +63,29 @@ export const handleSelectedProgram = async (projectName: string, selectedPath: s
  * @param {string} pathname 相对路径
  * @returns 绝对路径
  */
- function fixedToRelativePath (pathname) {
+ function fixedToRelativePath (pathname: string) {
   return path.join(cwd(), pathname)
 }
 
 function hasDir (projectPath: string) {
   return fs.existsSync(projectPath)
+}
+
+/**
+ * when prompts start, you need to listen the exit key press, when trigger ctrl + c,
+ * process will exit safely without any error occur
+ */
+export function listenTriggerExit () {
+  process.stdin.resume()
+  process.stdin.setEncoding('utf8')
+  process.stdin.on('keypress', (str: string, key: TerminalKey) => {
+    if ((key.ctrl && key.name) === 'c') {
+      process.exit()
+    }
+  })
+}
+
+interface TerminalKey {
+  ctrl: boolean
+  name: string
 }
