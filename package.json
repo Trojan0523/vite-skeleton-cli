@@ -2,14 +2,23 @@
   "name": "vite-skeleton-cli",
   "version": "1.0.0",
   "description": "",
-  "main": "main.ts",
   "scripts": {
     "start": "esno main.ts",
+    "build": "unbuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Trojan0523",
   "license": "ISC",
+  "type": "module",
+  "main": "./dist/main.mjs",
+  "module": "./dist/main.mjs",
+  "bin": {
+    "trojan": "bin/trojan.mjs"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "consola": "^2.15.3",
     "degit": "^2.8.4",
@@ -20,8 +29,10 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.2",
+    "@types/prompts": "^2.4.0",
     "esno": "^0.16.3",
     "picocolors": "^1.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "unbuild": "^0.8.11"
   }
 }
