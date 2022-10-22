@@ -44,5 +44,8 @@
   },
   "eslintConfig": {
     "extends": "@antfu"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }

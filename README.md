@@ -13,3 +13,7 @@
 - prompts
 - degit
 - zx
+
+## 执行指令
+
+- npx vite-skeleton-cli
