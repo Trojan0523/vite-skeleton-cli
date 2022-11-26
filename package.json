@@ -17,6 +17,7 @@
   "scripts": {
     "start": "esno main.ts",
     "build": "unbuild",
+    "analysis": "esno ./script/build.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --fix",
     "prepublishOnly": "unbuild",
@@ -47,5 +48,8 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "volta": {
+    "node": "18.12.1"
   }
 }
