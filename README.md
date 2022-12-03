@@ -9,7 +9,7 @@
 ## 技术栈
 
 - typeScript
-- esno
+- tsx
 - prompts
 - degit
 - zx
