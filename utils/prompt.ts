@@ -2,7 +2,7 @@
  * @Author: BuXiongYu
  * @Date: 2022-10-19 21:47:49
  * @LastEditors: BuXiongYu
- * @LastEditTime: 2022-10-21 23:15:04
+ * @LastEditTime: 2023-01-19 14:02:09
  * @Description: 用户选择界面
  */
 import type { PromptObject } from 'prompts'
@@ -27,6 +27,7 @@ export const bootstrap = async () => {
       choices: [
         { title: 'vite-express', value: 'vite-express' },
         { title: 'vite-nest', value: 'vite-nest' },
+        { title: 'typescript-template', value: 'typescript-template' },
       ],
       hint: '- Space to select. Return to submit',
     },

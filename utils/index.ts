@@ -2,7 +2,7 @@
  * @Author: BuXiongYu
  * @Date: 2022-10-19 22:06:52
  * @LastEditors: BuXiongYu
- * @LastEditTime: 2022-10-21 23:17:39
+ * @LastEditTime: 2023-01-19 15:28:19
  * @Description: 工具函数
  */
 import { cwd } from 'node:process'
@@ -16,8 +16,8 @@ import consola from 'consola'
 
 /**
  * 取出选择路径项目模板
- * @param projectName 项目名称
- * @param selectedPath 拉下来的monorepo模板仓的克隆选项
+ * @param {string} projectName 项目名称
+ * @param {string} selectedPath 拉下来的monorepo模板仓的克隆选项
  */
 export const handleSelectedProgram = async (projectName: string, selectedPath: string) => {
   const projectPath = fixedToRelativePath('/')
@@ -35,7 +35,30 @@ export const handleSelectedProgram = async (projectName: string, selectedPath: s
   await $`rm -rf ./__${projectName}`
 }
 
-// 下载远端仓库
+/**
+ * 生成项目
+ * @param {string} projectName 命名项目名称
+ */
+const generateProgram = async (projectName: string) => {
+  const projectPath = fixedToRelativePath('/')
+  if (hasDir(path.join(projectPath, `${projectName}`))) {
+    await $`rm -rf ./__${projectName}`
+    consola.error('directory path existed, please retype the project name as the directory path')
+    process.exit(0)
+  }
+  else {
+    await $`mkdir ${projectName}`
+  }
+  // copy selectedPath program
+  await $`cp -r  ${projectPath}__${projectName}/ ${projectName}`
+  await $`rm -rf ./__${projectName}`
+}
+
+/**
+ * 下载远端仓库 (vite-skeleton)
+ * @param {string} projectName
+ * @param {string} selectedProgram
+ */
 export const cloneRemoteRepo = (projectName: string, selectedProgram: string) => {
   const emitter = degit('https://github.com/trojan0523/vite-skeleton', {
     cache: true,
@@ -50,6 +73,32 @@ export const cloneRemoteRepo = (projectName: string, selectedProgram: string) =>
 
   emitter.clone(`__${projectName}`).then(async () => {
     await handleSelectedProgram(projectName, selectedProgram)
+    consola.success('project created successful')
+    // eslint-disable-next-line no-console
+    console.log(`
+      First  Step: ${pc.red('cd')} ${pc.gray(projectName)}
+      Second Step: ${pc.green('pnpm i')}
+      Third  Step: ${pc.yellow('pnpm run start:dev')}
+      `)
+  })
+}
+
+/**
+ * 下载远端模板仓库 (typescript-template)
+ * @param {string} projectName 项目名称
+ */
+export const cloneRemoteTypeScriptRepo = (projectName: string) => {
+  const emitter = degit('trojan0523/typescript-template', {
+    cache: true,
+    force: true,
+    verbose: true,
+  })
+  emitter.on('info', (info: any) => {
+    if (info.code === 'SUCCESS')
+      consola.success(`project ${info.repo.user}/${info.repo.name} cloned ${pc.yellow('success')}`)
+  })
+  emitter.clone(`__${projectName}`).then(async () => {
+    await generateProgram(projectName)
     consola.success('project created successful')
     // eslint-disable-next-line no-console
     console.log(`
