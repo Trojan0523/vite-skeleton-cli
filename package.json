@@ -7,9 +7,11 @@
   "license": "ISC",
   "keywords": [],
   "main": "./dist/main.mjs",
+  "exports": "./dist/main.mjs",
   "module": "./dist/main.mjs",
   "bin": {
-    "trojan": "bin/trojan.mjs"
+    "trojan": "bin/trojan.mjs",
+    "tt": "bin/trojan.mjs"
   },
   "files": [
     "dist"
