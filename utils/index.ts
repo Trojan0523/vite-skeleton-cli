@@ -2,7 +2,7 @@
  * @Author: BuXiongYu
  * @Date: 2022-10-19 22:06:52
  * @LastEditors: BuXiongYu
- * @LastEditTime: 2023-01-19 15:28:19
+ * @LastEditTime: 2023-07-22 14:35:55
  * @Description: 工具函数
  */
 import { cwd } from 'node:process'
@@ -61,7 +61,7 @@ const generateProgram = async (projectName: string) => {
  */
 export const cloneRemoteRepo = (projectName: string, selectedProgram: string) => {
   const emitter = degit('https://github.com/trojan0523/vite-skeleton', {
-    cache: true,
+    cache: false,
     force: true,
     verbose: true,
   })
@@ -89,7 +89,7 @@ export const cloneRemoteRepo = (projectName: string, selectedProgram: string) =>
  */
 export const cloneRemoteTypeScriptRepo = (projectName: string) => {
   const emitter = degit('trojan0523/typescript-template', {
-    cache: true,
+    cache: false,
     force: true,
     verbose: true,
   })
