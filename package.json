@@ -1,7 +1,7 @@
 {
   "name": "vite-skeleton-cli",
   "type": "module",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "a tool for fetching codebase using degit/tsx/unbuild/zx",
   "author": "Trojan0523",
   "license": "ISC",
